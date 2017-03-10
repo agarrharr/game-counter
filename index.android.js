@@ -1,31 +1,83 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight,
 } from 'react-native';
 
 export default class gameCounter extends Component {
+  constructor() {
+    super(...arguments);
+
+    this.state = {
+      score1: 0,
+      score2: 0,
+    };
+
+    this.handleScore1Add5 = this.handleScore1Add5.bind(this);
+  }
+
+  handleScore(options) {
+    console.log(options);
+    const {player, add} = options;
+    this.setState({
+      score1: this.state.score1 + (player === 1 ? add : 0),
+      score2: this.state.score2 + (player === 2 ? add : 0),
+    });
+  }
+
+  handleScore1Add1(options) {
+    console.log(options);
+    this.setState({
+      score1: this.state.score1 + 1,
+    });
+  }
+
+  handleScore1Add5() {
+    this.setState({
+      score1: this.state.score1 + 5,
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+        <Text style={styles.score}>
+          {this.state.score2}
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
+        <View style={styles.buttons}>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: -1})}>
+            <Text>-1</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: -5})}>
+            <Text>-5</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: 1})}>
+            <Text>+1</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: 5})}>
+            <Text>+5</Text>
+          </TouchableHighlight>
+        </View>
+        <Text style={styles.score}>
+          {this.state.score1}
         </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <View style={styles.buttons}>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: -1})}>
+            <Text>-1</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: -5})}>
+            <Text>-5</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: 1})}>
+            <Text>+1</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: 5})}>
+            <Text>+5</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -34,19 +86,27 @@ export default class gameCounter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  score: {
+    flex: 2,
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttons: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'red',
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 
