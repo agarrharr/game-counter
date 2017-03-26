@@ -9,7 +9,6 @@ module.exports = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     padding: 20,
-    marginTop: Platform.OS === 'android' ? 56 : 0,
   },
   row: {
     flexDirection: 'row',

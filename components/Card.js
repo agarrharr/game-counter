@@ -12,11 +12,17 @@ import Buttons from './Buttons';
 const theme = getTheme();
 const globalStyles = require('./globalStyles');
 const styles = {
+  card: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
   score: {
     color: COLORS.PRIMARY,
-    fontSize: 50,
+    fontSize: 100,
   },
   scoreView: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 }
@@ -25,7 +31,7 @@ const Card = React.createClass({
   render(){
     return (
       <View style={globalStyles.container}>
-        <View elevation={4} style={theme.cardStyle}>
+        <View elevation={4} style={[theme.cardStyle, styles.card]}>
           <View style={styles.scoreView}>
             <Text style={styles.score}>
               {this.props.score}

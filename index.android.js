@@ -44,13 +44,22 @@ export default class gameCounter extends Component {
           title={APP.TITLE}
           titleColor={COLORS.WHITE}
         />
-        <Card
-          score={this.state.score1}
-          onPressMinus1={this.handleScore.bind(this, {player: 1, add: -1})}
-          onPressMinus5={this.handleScore.bind(this, {player: 1, add: -5})}
-          onPressPlus5={this.handleScore.bind(this, {player: 1, add: 5})}
-          onPressPlus1={this.handleScore.bind(this, {player: 1, add: 1})}
-        />
+        <View style={styles.cardView}>
+          <Card
+            score={this.state.score1}
+            onPressMinus1={this.handleScore.bind(this, {player: 1, add: -1})}
+            onPressMinus5={this.handleScore.bind(this, {player: 1, add: -5})}
+            onPressPlus5={this.handleScore.bind(this, {player: 1, add: 5})}
+            onPressPlus1={this.handleScore.bind(this, {player: 1, add: 1})}
+          />
+          <Card
+            score={this.state.score2}
+            onPressMinus1={this.handleScore.bind(this, {player: 2, add: -1})}
+            onPressMinus5={this.handleScore.bind(this, {player: 2, add: -5})}
+            onPressPlus5={this.handleScore.bind(this, {player: 2, add: 5})}
+            onPressPlus1={this.handleScore.bind(this, {player: 2, add: 1})}
+          />
+        </View>
       </View>
     );
   }
@@ -65,6 +74,11 @@ const styles = {
     height: 56,
     backgroundColor: COLORS.PRIMARY,
   },
+  cardView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  }
 };
 
 AppRegistry.registerComponent('gameCounter', () => gameCounter);
