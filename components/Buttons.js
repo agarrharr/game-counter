@@ -21,8 +21,12 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
   buttonView: {
     flex: 1,
     alignItems: 'stretch',
-    borderWidth: 1,
-    borderColor: COLORS.PRIMARY,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderColor: COLORS.PRIMARY_20,
+  },
+  buttonViewLast: {
+    borderRightWidth: 0,
   },
   buttonText: {
     fontSize: 14,
@@ -59,7 +63,7 @@ class Buttons extends Component {
             </Text>
           </FlatButton>
         </View>
-        <View style={styles.buttonView}>
+        <View style={[styles.buttonView, styles.buttonViewLast]}>
           <FlatButton onPress={this.props.onPressPlus1}>
             <Text style={styles.buttonText}>
               +1
