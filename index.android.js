@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
 } from 'react-native';
+import Card from './components/Card';
 
 export default class gameCounter extends Component {
   constructor() {
@@ -15,8 +12,9 @@ export default class gameCounter extends Component {
       score1: 0,
       score2: 0,
     };
+    console.log('hi');
 
-    this.handleScore1Add5 = this.handleScore1Add5.bind(this);
+    this.handleMinus1 = this.handleMinus1.bind(this);
   }
 
   handleScore(options) {
@@ -28,86 +26,22 @@ export default class gameCounter extends Component {
     });
   }
 
-  handleScore1Add1(options) {
-    console.log(options);
-    this.setState({
-      score1: this.state.score1 + 1,
-    });
-  }
-
-  handleScore1Add5() {
-    this.setState({
-      score1: this.state.score1 + 5,
-    });
+  handleMinus1() {
+    console.log('handleMinus1');
+    this.handleScore({player: 1, add: -1});
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.score}>
-          {this.state.score2}
-        </Text>
-        <View style={styles.buttons}>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: -1})}>
-            <Text>-1</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: -5})}>
-            <Text>-5</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: 1})}>
-            <Text>+1</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 2, add: 5})}>
-            <Text>+5</Text>
-          </TouchableHighlight>
-        </View>
-        <Text style={styles.score}>
-          {this.state.score1}
-        </Text>
-        <View style={styles.buttons}>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: -1})}>
-            <Text>-1</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: -5})}>
-            <Text>-5</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: 1})}>
-            <Text>+1</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.handleScore.bind(this, {player: 1, add: 5})}>
-            <Text>+5</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      <Card
+        score={this.state.score1}
+        onPressMinus1={this.handleScore.bind(this, {player: 1, add: -1})}
+        onPressMinus5={this.handleScore.bind(this, {player: 1, add: -5})}
+        onPressPlus5={this.handleScore.bind(this, {player: 1, add: 5})}
+        onPressPlus1={this.handleScore.bind(this, {player: 1, add: 1})}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-  },
-  score: {
-    flex: 2,
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  buttons: {
-    flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'red',
-  },
-  button: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
 AppRegistry.registerComponent('gameCounter', () => gameCounter);
