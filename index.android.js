@@ -15,21 +15,25 @@ export default class gameCounter extends Component {
     this.state = {
       score1: 0,
       score2: 0,
+      previousScore1: 0,
+      previousScore2: 0,
     };
-
-    this.handleMinus1 = this.handleMinus1.bind(this);
   }
 
-  handleScore(options) {
-    const {player, add} = options;
+  handleUndo({player}) {
     this.setState({
-      score1: this.state.score1 + (player === 1 ? add : 0),
-      score2: this.state.score2 + (player === 2 ? add : 0),
+      score1: player === 1 ? this.state.previousScore1 : this.state.score1,
+      score2: player === 2 ? this.state.previousScore2 : this.state.score2,
     });
   }
 
-  handleMinus1() {
-    this.handleScore({player: 1, add: -1});
+  handleScore({player, add}) {
+    this.setState({
+      score1: this.state.score1 + (player === 1 ? add : 0),
+      score2: this.state.score2 + (player === 2 ? add : 0),
+      previousScore1: this.state.score1,
+      previousScore2: this.state.score2,
+    });
   }
 
   render() {
@@ -47,6 +51,7 @@ export default class gameCounter extends Component {
         <View style={styles.cardView}>
           <Card
             score={this.state.score1}
+            onPressUndo={this.handleUndo.bind(this, {player: 1})}
             onPressMinus1={this.handleScore.bind(this, {player: 1, add: -1})}
             onPressMinus5={this.handleScore.bind(this, {player: 1, add: -5})}
             onPressPlus5={this.handleScore.bind(this, {player: 1, add: 5})}
@@ -54,6 +59,7 @@ export default class gameCounter extends Component {
           />
           <Card
             score={this.state.score2}
+            onPressUndo={this.handleUndo.bind(this, {player: 2})}
             onPressMinus1={this.handleScore.bind(this, {player: 2, add: -1})}
             onPressMinus5={this.handleScore.bind(this, {player: 2, add: -5})}
             onPressPlus5={this.handleScore.bind(this, {player: 2, add: 5})}

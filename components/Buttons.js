@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-const MK = require('react-native-material-kit');
-const globalStyles = require('./globalStyles');
+import globalStyles from './globalStyles';
 import {
   StyleSheet,
   Text,
   View,
   Image,
 } from 'react-native';
-const {
+import {
   MKButton,
-  MKColor,
-} = MK;
+} from 'react-native-material-kit';
 import {COLORS} from '../constants';
+
+const FlatButton = MKButton.flatButton().build();
 
 const styles = Object.assign({}, globalStyles, StyleSheet.create({
   buttonRow: {
@@ -39,9 +39,6 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
     color: COLORS.PRIMARY,
   },
 }));
-
-const FlatButton = MKButton.flatButton()
-  .build();
 
 class Buttons extends Component {
   render() {
