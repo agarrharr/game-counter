@@ -24,12 +24,18 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
     borderTopWidth: 1,
     borderRightWidth: 1,
     borderColor: COLORS.PRIMARY_20,
+    height: 55,
   },
   buttonViewLast: {
     borderRightWidth: 0,
   },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   buttonText: {
-    fontSize: 14,
+    fontSize: 16,
     color: COLORS.PRIMARY,
   },
 }));
@@ -43,28 +49,28 @@ class Buttons extends Component {
     return (
       <View style={styles.buttonRow}>
         <View style={styles.buttonView}>
-          <FlatButton onPress={this.props.onPressMinus1}>
+          <FlatButton style={styles.button} onPress={this.props.onPressMinus1}>
             <Text pointerEvents="none" style={styles.buttonText}>
               -1
             </Text>
           </FlatButton>
         </View>
         <View style={styles.buttonView}>
-          <FlatButton onPress={this.props.onPressMinus5}>
+          <FlatButton style={styles.button} onPress={this.props.onPressMinus5}>
             <Text style={styles.buttonText}>
               -5
             </Text>
           </FlatButton>
         </View>
         <View style={styles.buttonView}>
-          <FlatButton onPress={this.props.onPressPlus5}>
+          <FlatButton style={styles.button} onPress={this.props.onPressPlus5}>
             <Text style={styles.buttonText}>
               +5
             </Text>
           </FlatButton>
         </View>
         <View style={[styles.buttonView, styles.buttonViewLast]}>
-          <FlatButton onPress={this.props.onPressPlus1}>
+          <FlatButton style={styles.button} onPress={this.props.onPressPlus1}>
             <Text style={styles.buttonText}>
               +1
             </Text>

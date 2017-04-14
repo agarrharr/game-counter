@@ -18,7 +18,7 @@ const styles = {
   },
   score: {
     color: COLORS.PRIMARY,
-    fontSize: 100,
+    fontSize: 136,
   },
   scoreView: {
     flex: 1,
