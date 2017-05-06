@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   View,
@@ -35,31 +35,66 @@ const styles = {
   },
 };
 
-const Card = React.createClass({
+const DELAY_TIME = 1000;
+
+export default class Card extends Component {
+  constructor() {
+    super(...arguments);
+
+    this.state = {
+      score: 0,
+      previousScore: [],
+      timeLastButtonWasPressed: null,
+    };
+
+    this.handleUndo = this.handleUndo.bind(this);
+  }
+
+  handleUndo() {
+    this.setState({
+      score: this.state.previousScore.length > 0
+        ? this.state.previousScore[this.state.previousScore.length - 1]
+        : this.state.score,
+      previousScore: this.state.previousScore.slice(0, this.state.previousScore.length - 1),
+    });
+  }
+
+  handleScore(addend) {
+    const currentTime = new Date().getTime();
+
+    this.setState({
+      score: this.state.score + addend,
+      timeLastButtonWasPressed: currentTime,
+      previousScore: currentTime - this.state.timeLastButtonWasPressed > DELAY_TIME
+        ? [...this.state.previousScore, this.state.score]
+        : this.state.previousScore,
+    });
+  }
+
   render(){
     return (
       <View style={globalStyles.container}>
         <View elevation={4} style={[theme.cardStyle, styles.card]}>
-          <FlatButton style={styles.topLeft} onPress={this.props.onPressUndo}>
+          <FlatButton style={styles.topLeft} onPress={this.handleUndo}>
             <Text>Undo</Text>
           </FlatButton>
           <View style={styles.scoreView}>
             <Text style={styles.score}>
-              {this.props.score}
+              {this.state.score}
             </Text>
           </View>
           <View>
             <Buttons
-              onPressMinus1={this.props.onPressMinus1}
-              onPressMinus5={this.props.onPressMinus5}
-              onPressPlus5={this.props.onPressPlus5}
-              onPressPlus1={this.props.onPressPlus1}
+              onPressMinus1={this.handleScore.bind(this, -1)}
+              onPressMinus5={this.handleScore.bind(this, -5)}
+              onPressPlus5={this.handleScore.bind(this, 5)}
+              onPressPlus1={this.handleScore.bind(this, 1)}
             />
           </View>
         </View>
       </View>
     )
   }
-});
+};
 
 module.exports = Card;
