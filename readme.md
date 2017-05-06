@@ -73,3 +73,24 @@ export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 ```
+
+## Making a release
+
+This is from the [React Native Documentation](http://facebook.github.io/react-native/docs/signed-apk-android.html).
+
+1. Make sure you have the keystore file (`my-release-key.keystore`) in `android/app`.
+1. Edit the file `~/android/gradle.properties` and add the following (replace ***** with the correct keystore password, alias and key password),
+
+    ```
+    MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+    MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+    MYAPP_RELEASE_STORE_PASSWORD=*****
+    MYAPP_RELEASE_KEY_PASSWORD=*****
+    ```
+
+1. Generating the release APK
+
+    ```
+    cd android
+    ./gradlew assembleRelease
+    ```
