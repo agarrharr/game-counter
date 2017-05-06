@@ -94,3 +94,5 @@ This is from the [React Native Documentation](http://facebook.github.io/react-na
     cd android
     ./gradlew assembleRelease
     ```
+
+The generated APK can be found under `android/app/build/outputs/apk/app-release.apk`.
