@@ -96,3 +96,16 @@ This is from the [React Native Documentation](http://facebook.github.io/react-na
     ```
 
 The generated APK can be found under `android/app/build/outputs/apk/app-release.apk`.
+
+## Todo
+
+- [ ] Undo icon
+- [ ] Status bar color
+- [ ] Keep the screen on
+- [ ] Color picker
+- [ ] Animation when adding/subtracting
+- [ ] Choose app name
+- [ ] Add app icon
+- [ ] Ability to turn one of the cards upside down
+- [ ] New game button
+- [ ] Setting for starting score
