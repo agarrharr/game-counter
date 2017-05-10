@@ -10,19 +10,13 @@ import {
 import globalStyles from './globalStyles';
 import {COLORS} from '../constants';
 import Buttons from './Buttons';
-
-const FlatButton = MKButton.flatButton().build();
+import UndoButton from './UndoButton';
 
 const theme = getTheme();
 const styles = {
   card: {
     flex: 1,
     justifyContent: 'space-between',
-  },
-  topLeft: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
   },
   score: {
     color: COLORS.PRIMARY,
@@ -42,7 +36,7 @@ export default class Card extends Component {
     super(...arguments);
 
     this.state = {
-      score: 0,
+      score: 50,
       previousScore: [],
       timeLastButtonWasPressed: null,
     };
@@ -75,9 +69,7 @@ export default class Card extends Component {
     return (
       <View style={globalStyles.container}>
         <View elevation={4} style={[theme.cardStyle, styles.card]}>
-          <FlatButton style={styles.topLeft} onPress={this.handleUndo}>
-            <Text>Undo</Text>
-          </FlatButton>
+          <UndoButton onPress={this.handleUndo} />
           <View style={styles.scoreView}>
             <Text style={styles.score}>
               {this.state.score}
