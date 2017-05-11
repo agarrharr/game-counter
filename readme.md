@@ -99,13 +99,17 @@ The generated APK can be found under `android/app/build/outputs/apk/app-release.
 
 ## Todo
 
-- [ ] Undo icon
-- [ ] Status bar color
+- [x] Add undo icon
+- [x] Add app icon
+- [ ] Remove unnecessary permissions
+- [ ] Use correct undo icon
+- [ ] Make the score text responsive
+- [ ] Status bar color should be slightly darker
 - [ ] Keep the screen on
-- [ ] Color picker
+- [ ] Add more menu on card
+- [ ] Add color picker on more menu
 - [ ] Animation when adding/subtracting
 - [ ] Choose app name
-- [ ] Add app icon
-- [ ] Ability to turn one of the cards upside down
-- [ ] New game button
-- [ ] Setting for starting score
+- [ ] Add hamburger menu?
+- [ ] New game button?
+- [ ] Setting for starting score?
