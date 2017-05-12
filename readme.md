@@ -99,17 +99,23 @@ The generated APK can be found under `android/app/build/outputs/apk/app-release.
 
 ## Todo
 
+### MVC
+
 - [x] Add undo icon
 - [x] Add app icon
-- [ ] Remove unnecessary permissions
+- [ ] Animation when adding/subtracting
 - [ ] Use correct undo icon
 - [ ] Make the score text responsive
 - [ ] Status bar color should be slightly darker
+- [ ] Choose app name
 - [ ] Keep the screen on
+- [ ] Remove unnecessary permissions
+- [ ] Publish on Google Play and F-Droid
+
+### Stretch Goals
+
 - [ ] Add more menu on card
 - [ ] Add color picker on more menu
-- [ ] Animation when adding/subtracting
-- [ ] Choose app name
 - [ ] Add hamburger menu?
 - [ ] New game button?
 - [ ] Setting for starting score?

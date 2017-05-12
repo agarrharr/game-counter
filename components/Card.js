@@ -11,6 +11,7 @@ import globalStyles from './globalStyles';
 import {COLORS} from '../constants';
 import Buttons from './Buttons';
 import UndoButton from './UndoButton';
+import {Animated} from 'react-native';
 
 const theme = getTheme();
 const styles = {
@@ -29,51 +30,93 @@ const styles = {
   },
 };
 
-const DELAY_TIME = 1000;
+const DELAY_TIME = 750;
+const ANIMATION_DURATION = 300;
+const STARTING_SCORE = 50;
 
 export default class Card extends Component {
   constructor() {
     super(...arguments);
 
     this.state = {
-      score: 50,
-      previousScore: [],
-      timeLastButtonWasPressed: null,
+      score: STARTING_SCORE,
+      inProgressScore: STARTING_SCORE,
+      previousScores: [],
+      fadeAnimation: new Animated.Value(1),
     };
 
     this.handleUndo = this.handleUndo.bind(this);
   }
 
+  fadeScore() {
+    Animated.sequence([
+      Animated.timing(
+        this.state.fadeAnimation,
+        {
+          toValue: 0,
+          duration: ANIMATION_DURATION,
+        }
+      ),
+      Animated.timing(
+        this.state.fadeAnimation,
+        {
+          toValue: 1,
+          duration: ANIMATION_DURATION,
+        }
+      ),
+    ])
+    .start();
+  }
+
   handleUndo() {
+    console.log('undo');
+    window.clearTimeout(this.fadeTimeout);
+
+    const score = this.state.previousScores.length > 0
+        ? this.state.previousScores[this.state.previousScores.length - 1]
+        : this.state.score;
+
     this.setState({
-      score: this.state.previousScore.length > 0
-        ? this.state.previousScore[this.state.previousScore.length - 1]
-        : this.state.score,
-      previousScore: this.state.previousScore.slice(0, this.state.previousScore.length - 1),
+      score,
+      inProgressScore: score,
+      previousScores: this.state.previousScores.slice(0, this.state.previousScores.length - 1),
     });
   }
 
   handleScore(addend) {
+    console.log('score');
     const currentTime = new Date().getTime();
 
     this.setState({
-      score: this.state.score + addend,
-      timeLastButtonWasPressed: currentTime,
-      previousScore: currentTime - this.state.timeLastButtonWasPressed > DELAY_TIME
-        ? [...this.state.previousScore, this.state.score]
-        : this.state.previousScore,
+      inProgressScore: this.state.inProgressScore + addend,
     });
+
+    window.clearTimeout(this.fadeTimeout);
+
+    this.fadeTimeout = setTimeout(() => {
+      setTimeout(() => {
+        this.setState({
+          score: this.state.inProgressScore,
+          previousScores: [...this.state.previousScores, this.state.score],
+        });
+      }, ANIMATION_DURATION);
+
+      this.fadeScore();
+    }, DELAY_TIME);
+
   }
 
   render(){
     return (
       <View style={globalStyles.container}>
         <View elevation={4} style={[theme.cardStyle, styles.card]}>
-          <UndoButton onPress={this.handleUndo} />
           <View style={styles.scoreView}>
-            <Text style={styles.score}>
-              {this.state.score}
-            </Text>
+            <UndoButton onPress={this.handleUndo} />
+            <Animated.View style={{opacity: this.state.fadeAnimation}}>
+              <Text style={styles.score}>
+                {this.state.score}
+              </Text>
+            </Animated.View>
           </View>
           <View>
             <Buttons
