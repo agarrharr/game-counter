@@ -103,7 +103,7 @@ The generated APK can be found under `android/app/build/outputs/apk/app-release.
 
 - [x] Add undo icon
 - [x] Add app icon
-- [ ] Animation when adding/subtracting
+- [x] Animation when adding/subtracting
 - [ ] Use correct undo icon
 - [ ] Make the score text responsive
 - [ ] Status bar color should be slightly darker

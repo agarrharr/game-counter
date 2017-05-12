@@ -31,7 +31,7 @@ const styles = {
 };
 
 const DELAY_TIME = 750;
-const ANIMATION_DURATION = 300;
+const ANIMATION_DURATION = 600;
 const STARTING_SCORE = 50;
 
 export default class Card extends Component {
@@ -55,14 +55,14 @@ export default class Card extends Component {
         this.state.fadeAnimation,
         {
           toValue: 0,
-          duration: ANIMATION_DURATION,
+          duration: ANIMATION_DURATION / 2,
         }
       ),
       Animated.timing(
         this.state.fadeAnimation,
         {
           toValue: 1,
-          duration: ANIMATION_DURATION,
+          duration: ANIMATION_DURATION / 2,
         }
       ),
     ])
@@ -86,20 +86,23 @@ export default class Card extends Component {
   handleScore(addend) {
     const currentTime = new Date().getTime();
 
+    window.clearTimeout(this.fadeTimeout);
+
     this.setState({
       addend: this.state.addend + addend,
     });
 
-    window.clearTimeout(this.fadeTimeout);
-
     this.fadeTimeout = setTimeout(() => {
+      const oldAddend = this.state.addend;
+      this.setState({
+        addend: 0,
+      });
       setTimeout(() => {
         this.setState({
-          addend: 0,
-          score: this.state.score + this.state.addend,
+          score: this.state.score + oldAddend,
           previousScores: [...this.state.previousScores, this.state.score],
         });
-      }, ANIMATION_DURATION);
+      }, ANIMATION_DURATION / 2);
 
       this.fadeScore();
     }, DELAY_TIME);

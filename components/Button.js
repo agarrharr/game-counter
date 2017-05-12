@@ -13,7 +13,7 @@ import {MKButton} from 'react-native-material-kit';
 const FlatButton = MKButton.flatButton().build();
 
 const BUTTON_HEIGHT = 100;
-const ANIMATION_DURATION = 300;
+const ANIMATION_DURATION = 600;
 const ANIMATION_MOVEMENT_DURATION = ANIMATION_DURATION * 0.8;
 const ANIMATION_FADE_DURATION = ANIMATION_DURATION * 0.2;
 
