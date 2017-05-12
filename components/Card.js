@@ -19,18 +19,21 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
+  topBar: {
+    flex: 1,
+  },
+  scoreView: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   score: {
     color: COLORS.PRIMARY,
     fontSize: 136,
   },
-  scoreView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 };
 
-const DELAY_TIME = 750;
+const DELAY_TIME = 900;
 const ANIMATION_DURATION = 600;
 const STARTING_SCORE = 50;
 
@@ -112,17 +115,15 @@ export default class Card extends Component {
     return (
       <View style={globalStyles.container}>
         <View elevation={4} style={[theme.cardStyle, styles.card]}>
-          <View style={styles.scoreView}>
+          <View style={styles.topBar}>
             <UndoButton onPress={this.handleUndo} />
-            <Animated.View style={{opacity: this.state.fadeAnimation}}>
-              <Text style={styles.score}>
-                {this.state.score}
-              </Text>
-            </Animated.View>
           </View>
-          <View>
-            <Buttons onPress={this.handleScore} addend={this.state.addend} />
-          </View>
+          <Animated.View style={{...styles.scoreView, opacity: this.state.fadeAnimation}}>
+            <Text style={styles.score}>
+              {this.state.score}
+            </Text>
+          </Animated.View>
+          <Buttons onPress={this.handleScore} addend={this.state.addend} />
         </View>
       </View>
     )
