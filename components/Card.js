@@ -40,7 +40,7 @@ export default class Card extends Component {
 
     this.state = {
       score: STARTING_SCORE,
-      inProgressScore: STARTING_SCORE,
+      addend: 0,
       previousScores: [],
       fadeAnimation: new Animated.Value(1),
     };
@@ -78,17 +78,16 @@ export default class Card extends Component {
 
     this.setState({
       score,
-      inProgressScore: score,
+      addend: 0,
       previousScores: this.state.previousScores.slice(0, this.state.previousScores.length - 1),
     });
   }
 
   handleScore(addend) {
-    console.log(addend);
     const currentTime = new Date().getTime();
 
     this.setState({
-      inProgressScore: this.state.inProgressScore + addend,
+      addend: this.state.addend + addend,
     });
 
     window.clearTimeout(this.fadeTimeout);
@@ -96,7 +95,8 @@ export default class Card extends Component {
     this.fadeTimeout = setTimeout(() => {
       setTimeout(() => {
         this.setState({
-          score: this.state.inProgressScore,
+          addend: 0,
+          score: this.state.score + this.state.addend,
           previousScores: [...this.state.previousScores, this.state.score],
         });
       }, ANIMATION_DURATION);
@@ -118,7 +118,7 @@ export default class Card extends Component {
             </Animated.View>
           </View>
           <View>
-            <Buttons onPress={this.handleScore} />
+            <Buttons onPress={this.handleScore} addend={this.state.addend} />
           </View>
         </View>
       </View>

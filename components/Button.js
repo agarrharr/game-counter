@@ -13,6 +13,9 @@ import {MKButton} from 'react-native-material-kit';
 const FlatButton = MKButton.flatButton().build();
 
 const BUTTON_HEIGHT = 100;
+const ANIMATION_DURATION = 300;
+const ANIMATION_MOVEMENT_DURATION = ANIMATION_DURATION * 0.8;
+const ANIMATION_FADE_DURATION = ANIMATION_DURATION * 0.2;
 
 const styles = Object.assign({}, globalStyles, StyleSheet.create({
   containerView: {
@@ -60,13 +63,6 @@ class Button extends Component {
 
     Animated.sequence([
       Animated.timing(
-        this.state.opacityAnimation,
-        {
-          toValue: 0,
-          duration: 300,
-        }
-      ),
-      Animated.timing(
         this.state.topAnimation,
         {
           toValue: BUTTON_HEIGHT / 2,
@@ -78,7 +74,7 @@ class Button extends Component {
           this.state.topAnimation,
           {
             toValue: 0,
-            duration: 300,
+            duration: ANIMATION_MOVEMENT_DURATION,
             ease: Easing.easeOutIn,
           }
         ),
@@ -86,7 +82,7 @@ class Button extends Component {
           this.state.opacityAnimation,
           {
             toValue: 1,
-            duration: 300,
+            duration: ANIMATION_MOVEMENT_DURATION,
           }
         ),
       ]),
@@ -94,7 +90,7 @@ class Button extends Component {
         this.state.opacityAnimation,
         {
           toValue: 0,
-          duration: 300,
+          duration: ANIMATION_FADE_DURATION,
         }
       ),
     ])
@@ -115,9 +111,9 @@ class Button extends Component {
         <Animated.View style={animatedNumberStyles}
         >
           <Text style={styles.buttonText}>
-            {this.props.amount > 0
-                ? `+${this.props.amount}`
-                : this.props.amount
+            {this.props.addend > 0
+                ? `+${this.props.addend}`
+                : this.props.addend
             }
           </Text>
         </Animated.View>

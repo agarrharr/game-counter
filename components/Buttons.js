@@ -19,10 +19,10 @@ class Buttons extends Component {
     const {onPressMinus1} = this.props;
     return (
       <View style={styles.buttonRow}>
-        <Button amount={-1} onPress={this.props.onPress} />
-        <Button amount={-5} onPress={this.props.onPress} />
-        <Button amount={5} onPress={this.props.onPress} />
-        <Button amount={1} onPress={this.props.onPress} rightBorder={false} />
+        <Button amount={-1}  addend={this.props.addend}onPress={this.props.onPress} />
+        <Button amount={-5}  addend={this.props.addend}onPress={this.props.onPress} />
+        <Button amount={5}  addend={this.props.addend}onPress={this.props.onPress} />
+        <Button amount={1} addend={this.props.addend} onPress={this.props.onPress} />
       </View>
     );
   }
