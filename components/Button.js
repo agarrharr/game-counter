@@ -12,18 +12,20 @@ import {MKButton} from 'react-native-material-kit';
 
 const FlatButton = MKButton.flatButton().build();
 
+const BUTTON_HEIGHT = 100;
+
 const styles = Object.assign({}, globalStyles, StyleSheet.create({
   containerView: {
     flex: 1,
     flexDirection: 'column',
-    height: 50,
+    height: BUTTON_HEIGHT,
   },
   animatedNumber: {
-    position: 'absolute',
-    top: 0,
-    left: '50%',
+    flex: 1,
+    alignItems: 'center',
   },
   buttonView: {
+    position: 'relative',
     flex: 1,
     alignItems: 'stretch',
     borderTopWidth: 1,
@@ -46,7 +48,7 @@ class Button extends Component {
     super(...arguments);
 
     this.state = {
-      topAnimation: new Animated.Value(1),
+      topAnimation: new Animated.Value(BUTTON_HEIGHT / 2),
       opacityAnimation: new Animated.Value(0),
     };
 
@@ -67,7 +69,7 @@ class Button extends Component {
       Animated.timing(
         this.state.topAnimation,
         {
-          toValue: 0,
+          toValue: BUTTON_HEIGHT / 2,
           duration: 0,
         }
       ),
@@ -75,7 +77,7 @@ class Button extends Component {
         Animated.timing(
           this.state.topAnimation,
           {
-            toValue: -30,
+            toValue: 0,
             duration: 300,
             ease: Easing.easeOutIn,
           }
@@ -95,13 +97,6 @@ class Button extends Component {
           duration: 300,
         }
       ),
-      Animated.timing(
-        this.state.topAnimation,
-        {
-          toValue: 0,
-          duration: 0,
-        }
-      ),
     ])
     .start();
   }
@@ -110,7 +105,7 @@ class Button extends Component {
     const animatedNumberStyles = StyleSheet.flatten([
       styles.animatedNumber,
       {
-        top: this.state.topAnimation,
+        transform: [{translateY: this.state.topAnimation}],
         opacity: this.state.opacityAnimation,
       }
     ]);
