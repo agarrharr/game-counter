@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  Animated,
   Text,
   View,
 } from 'react-native';
@@ -11,7 +12,6 @@ import globalStyles from './globalStyles';
 import {COLORS} from '../constants';
 import Buttons from './Buttons';
 import UndoButton from './UndoButton';
-import {Animated} from 'react-native';
 
 const theme = getTheme();
 const styles = {
@@ -46,6 +46,7 @@ export default class Card extends Component {
     };
 
     this.handleUndo = this.handleUndo.bind(this);
+    this.handleScore = this.handleScore.bind(this);
   }
 
   fadeScore() {
@@ -69,7 +70,6 @@ export default class Card extends Component {
   }
 
   handleUndo() {
-    console.log('undo');
     window.clearTimeout(this.fadeTimeout);
 
     const score = this.state.previousScores.length > 0
@@ -84,7 +84,7 @@ export default class Card extends Component {
   }
 
   handleScore(addend) {
-    console.log('score');
+    console.log(addend);
     const currentTime = new Date().getTime();
 
     this.setState({
@@ -103,7 +103,6 @@ export default class Card extends Component {
 
       this.fadeScore();
     }, DELAY_TIME);
-
   }
 
   render(){
@@ -119,12 +118,7 @@ export default class Card extends Component {
             </Animated.View>
           </View>
           <View>
-            <Buttons
-              onPressMinus1={this.handleScore.bind(this, -1)}
-              onPressMinus5={this.handleScore.bind(this, -5)}
-              onPressPlus5={this.handleScore.bind(this, 5)}
-              onPressPlus1={this.handleScore.bind(this, 1)}
-            />
+            <Buttons onPress={this.handleScore} />
           </View>
         </View>
       </View>
