@@ -22,7 +22,7 @@ class Buttons extends Component {
         <Button amount={-1} onPress={this.props.onPress} />
         <Button amount={-5} onPress={this.props.onPress} />
         <Button amount={5} onPress={this.props.onPress} />
-        <Button amount={1} onPress={this.props.onPress} />
+        <Button amount={1} onPress={this.props.onPress} rightBorder={false} />
       </View>
     );
   }
