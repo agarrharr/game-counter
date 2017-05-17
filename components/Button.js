@@ -1,31 +1,25 @@
 import React, {Component} from 'react';
+import {MKButton} from 'react-native-material-kit';
 import {
-  Animated,
-  Easing,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import globalStyles from './globalStyles';
 import {COLORS} from '../constants';
-import {MKButton} from 'react-native-material-kit';
+import AnimatedNumber from './AnimatedNumber';
 
 const FlatButton = MKButton.flatButton().build();
 
-const BUTTON_HEIGHT = 100;
-const ANIMATION_DURATION = 600;
-const ANIMATION_MOVEMENT_DURATION = ANIMATION_DURATION * 0.8;
-const ANIMATION_FADE_DURATION = ANIMATION_DURATION * 0.2;
+// TODO: remove BUTTON_HEIGHT
+const BUTTON_HEIGHT = 50;
+const DELAY_TIME = 900;
 
 const styles = Object.assign({}, globalStyles, StyleSheet.create({
   containerView: {
     flex: 1,
     flexDirection: 'column',
     height: BUTTON_HEIGHT,
-  },
-  animatedNumber: {
-    flex: 1,
-    alignItems: 'center',
   },
   buttonView: {
     position: 'relative',
@@ -51,72 +45,32 @@ class Button extends Component {
     super(...arguments);
 
     this.state = {
-      topAnimation: new Animated.Value(BUTTON_HEIGHT / 2),
-      opacityAnimation: new Animated.Value(0),
+      addends: [],
+      nextAddend: this.props.amount,
     };
 
     this.handlePress = this.handlePress.bind(this);
   }
 
   handlePress() {
+    const currentTime = new Date().getTime();
     this.props.onPress(this.props.amount);
 
-    Animated.sequence([
-      Animated.timing(
-        this.state.topAnimation,
-        {
-          toValue: BUTTON_HEIGHT / 2,
-          duration: 0,
-        }
-      ),
-      Animated.parallel([
-        Animated.timing(
-          this.state.topAnimation,
-          {
-            toValue: 0,
-            duration: ANIMATION_MOVEMENT_DURATION,
-            ease: Easing.easeOutIn,
-          }
-        ),
-        Animated.timing(
-          this.state.opacityAnimation,
-          {
-            toValue: 1,
-            duration: ANIMATION_MOVEMENT_DURATION,
-          }
-        ),
-      ]),
-      Animated.timing(
-        this.state.opacityAnimation,
-        {
-          toValue: 0,
-          duration: ANIMATION_FADE_DURATION,
-        }
-      ),
-    ])
-    .start();
+    this.setState({
+      addends: [
+        ...this.state.addends,
+        this.state.nextAddend,
+      ],
+      nextAddend: this.state.nextAddend + this.props.amount,
+    });
   }
 
   render() {
-    const animatedNumberStyles = StyleSheet.flatten([
-      styles.animatedNumber,
-      {
-        transform: [{translateY: this.state.topAnimation}],
-        opacity: this.state.opacityAnimation,
-      }
-    ]);
-
     return (
       <View style={styles.containerView}>
-        <Animated.View style={animatedNumberStyles}
-        >
-          <Text style={styles.buttonText}>
-            {this.props.addend > 0
-                ? `+${this.props.addend}`
-                : this.props.addend
-            }
-          </Text>
-        </Animated.View>
+        {this.state.addends.map((addend) => (
+          <AnimatedNumber addend={addend} key={addend} />
+        ))}
         <View style={styles.buttonView}>
           <FlatButton
             style={styles.button}

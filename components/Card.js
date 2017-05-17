@@ -33,7 +33,6 @@ const styles = {
   },
 };
 
-const DELAY_TIME = 900;
 const ANIMATION_DURATION = 600;
 const STARTING_SCORE = 50;
 
@@ -43,7 +42,6 @@ export default class Card extends Component {
 
     this.state = {
       score: STARTING_SCORE,
-      addend: 0,
       previousScores: [],
       fadeAnimation: new Animated.Value(1),
     };
@@ -81,34 +79,17 @@ export default class Card extends Component {
 
     this.setState({
       score,
-      addend: 0,
       previousScores: this.state.previousScores.slice(0, this.state.previousScores.length - 1),
     });
   }
 
-  handleScore(addend) {
-    const currentTime = new Date().getTime();
-
-    window.clearTimeout(this.fadeTimeout);
-
+  handleScore(score) {
     this.setState({
-      addend: this.state.addend + addend,
+      score,
+      previousScores: [...this.state.previousScores, score],
     });
 
-    this.fadeTimeout = setTimeout(() => {
-      const oldAddend = this.state.addend;
-      this.setState({
-        addend: 0,
-      });
-      setTimeout(() => {
-        this.setState({
-          score: this.state.score + oldAddend,
-          previousScores: [...this.state.previousScores, this.state.score],
-        });
-      }, ANIMATION_DURATION / 2);
-
-      this.fadeScore();
-    }, DELAY_TIME);
+    this.fadeScore();
   }
 
   render(){
@@ -123,7 +104,7 @@ export default class Card extends Component {
               {this.state.score}
             </Text>
           </Animated.View>
-          <Buttons onPress={this.handleScore} addend={this.state.addend} />
+          <Buttons onScore={this.state.handleScore} />
         </View>
       </View>
     )
