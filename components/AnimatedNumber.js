@@ -9,6 +9,7 @@ import globalStyles from './globalStyles';
 import {COLORS} from '../constants';
 
 const BUTTON_HEIGHT = 50;
+const NUMBER_WIDTH = 50;
 const ANIMATION_DURATION = 600;
 const ANIMATION_MOVEMENT_DURATION = ANIMATION_DURATION * 1;
 const ANIMATION_FADE_DURATION = ANIMATION_DURATION * 0.3;
@@ -21,14 +22,10 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
   animatedNumber: {
     position: 'absolute',
     height: BUTTON_HEIGHT,
+    width: NUMBER_WIDTH,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderColor: COLORS.PRIMARY_20,
   },
   buttonText: {
     fontSize: 16,
@@ -94,7 +91,7 @@ export default class AnimatedNumber extends Component {
     const animatedNumberStyles = StyleSheet.flatten([
       styles.animatedNumber,
       {
-        // width: this.state.buttonWidth,
+        left: (this.props.width - NUMBER_WIDTH) / 2,
         top: this.state.topAnimation,
         opacity: this.state.opacityAnimation,
       }

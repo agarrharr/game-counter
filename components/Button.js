@@ -50,6 +50,8 @@ class Button extends Component {
     };
 
     this.handlePress = this.handlePress.bind(this);
+    this.handleAnimationComplete = this.handleAnimationComplete.bind(this);
+    this.handleLayoutChange = this.handleLayoutChange.bind(this);
   }
 
   handlePress() {
@@ -65,13 +67,30 @@ class Button extends Component {
     });
   }
 
+  handleAnimationComplete() {
+    this.setState({
+      addends: [...this.state.addends.slice(0, this.state.addends.length - 1)],
+    });
+  }
+
+  handleLayoutChange(event) {
+    var {x, y, width, height} = event.nativeEvent.layout;
+    console.log(width);
+    this.setState({width});
+  }
+
   render() {
     return (
       <View style={styles.containerView}>
         {this.state.addends.map((addend) => (
-          <AnimatedNumber addend={addend} key={addend} />
+          <AnimatedNumber
+            addend={addend}
+            width={this.state.width}
+            key={addend}
+            onAnimationComplete={this.handleAnimationComplete}
+          />
         ))}
-        <View style={styles.buttonView}>
+        <View onLayout={this.handleLayoutChange} style={styles.buttonView}>
           <FlatButton
             style={styles.button}
             onPress={this.handlePress}
