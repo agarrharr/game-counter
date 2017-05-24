@@ -20,10 +20,8 @@ const styles = {
     justifyContent: 'space-between',
   },
   topBar: {
-    flex: 1,
   },
   scoreView: {
-    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
