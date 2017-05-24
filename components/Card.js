@@ -83,7 +83,8 @@ export default class Card extends Component {
     });
   }
 
-  handleScore(score) {
+  handleScore(addend) {
+    const score = this.state.score + addend;
     this.setState({
       score,
       previousScores: [...this.state.previousScores, score],
@@ -104,7 +105,7 @@ export default class Card extends Component {
               {this.state.score}
             </Text>
           </Animated.View>
-          <Buttons onScore={this.state.handleScore} />
+          <Buttons onScore={this.handleScore} />
         </View>
       </View>
     )

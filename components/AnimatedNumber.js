@@ -84,7 +84,7 @@ export default class AnimatedNumber extends Component {
         ),
       ]),
     ])
-    .start();
+      .start(this.props.onAnimationComplete);
   }
 
   render(){

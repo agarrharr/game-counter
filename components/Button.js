@@ -46,7 +46,6 @@ class Button extends Component {
 
     this.state = {
       addends: [],
-      nextAddend: this.props.amount,
     };
 
     this.handlePress = this.handlePress.bind(this);
@@ -61,9 +60,8 @@ class Button extends Component {
     this.setState({
       addends: [
         ...this.state.addends,
-        this.state.nextAddend,
+        this.props.addend + this.props.amount,
       ],
-      nextAddend: this.state.nextAddend + this.props.amount,
     });
   }
 
@@ -75,7 +73,6 @@ class Button extends Component {
 
   handleLayoutChange(event) {
     var {x, y, width, height} = event.nativeEvent.layout;
-    console.log(width);
     this.setState({width});
   }
 

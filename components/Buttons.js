@@ -28,23 +28,28 @@ class Buttons extends Component {
   }
 
   handlePress(addend) {
-    this.setState({addend});
+    this.setState({
+      addend: this.state.addend + addend,
+    });
 
-    // window.clearTimeout(this.timer);
+    window.clearTimeout(this.timer);
 
-    // this.timer = setTimeout(() => {
-    //   this.props.onScore(this.state.addend);
-    // }, DELAY_TIME);
+    this.timer = setTimeout(() => {
+      this.props.onScore(this.state.addend);
+      this.setState({
+        addend: 0,
+      });
+    }, DELAY_TIME);
   }
 
   render() {
     const {onPressMinus1} = this.props;
     return (
       <View style={styles.buttonRow}>
-        <Button amount={-1} onPress={this.handlePress} />
-        <Button amount={-5} onPress={this.handlePress} />
-        <Button amount={5} onPress={this.handlePress} />
-        <Button amount={1} onPress={this.handlePress} />
+        <Button amount={-1} addend={this.state.addend} onPress={this.handlePress} />
+        <Button amount={-5} addend={this.state.addend} onPress={this.handlePress} />
+        <Button amount={5} addend={this.state.addend} onPress={this.handlePress} />
+        <Button amount={1} addend={this.state.addend} onPress={this.handlePress} />
       </View>
     );
   }
