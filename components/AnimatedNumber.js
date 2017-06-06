@@ -34,23 +34,17 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
 }));
 
 export default class AnimatedNumber extends Component {
-  constructor() {
-    super(...arguments);
-
-    this.state = {
-      buttonWidth: 0,
-      topAnimation: new Animated.Value(0),
-      opacityAnimation: new Animated.Value(0),
-    };
-
-    this.animate = this.animate.bind(this);
-  }
+  state = {
+    buttonWidth: 0,
+    topAnimation: new Animated.Value(0),
+    opacityAnimation: new Animated.Value(0),
+  };
 
   componentDidMount() {
     this.animate();
   }
 
-  animate() {
+  animate = () => {
     Animated.sequence([
       Animated.timing(
         this.state.topAnimation,
@@ -84,7 +78,11 @@ export default class AnimatedNumber extends Component {
         ),
       ]),
     ])
-      .start(this.props.onAnimationComplete);
+    .start(this.handleAnimationComplete);
+  };
+
+  handleAnimationComplete = () => {
+    this.props.onAnimationComplete();
   }
 
   render(){

@@ -41,19 +41,11 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
 }));
 
 class Button extends Component {
-  constructor() {
-    super(...arguments);
+  state = {
+    addends: [],
+  };
 
-    this.state = {
-      addends: [],
-    };
-
-    this.handlePress = this.handlePress.bind(this);
-    this.handleAnimationComplete = this.handleAnimationComplete.bind(this);
-    this.handleLayoutChange = this.handleLayoutChange.bind(this);
-  }
-
-  handlePress() {
+  handlePress = () => {
     const currentTime = new Date().getTime();
     this.props.onPress(this.props.amount);
 
@@ -63,18 +55,17 @@ class Button extends Component {
         this.props.addend + this.props.amount,
       ],
     });
-  }
+  };
 
-  handleAnimationComplete() {
+  handleAnimationComplete = () => {
     this.setState({
       addends: [...this.state.addends.slice(0, this.state.addends.length - 1)],
     });
-  }
+  };
 
-  handleLayoutChange(event) {
-    var {x, y, width, height} = event.nativeEvent.layout;
-    this.setState({width});
-  }
+  handleLayoutChange = event => {
+    this.setState({width: event.nativeEvent.layout.width});
+  };
 
   render() {
     return (
