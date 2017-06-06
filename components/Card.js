@@ -19,12 +19,16 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
-  topBar: {
+  topSection: {
     flex: 1,
-    height: 10,
+    flexDirection: 'row',
+  },
+  sideBar: {
+    flex: 1,
+    maxWidth: 30,
   },
   scoreView: {
-    flex: 4,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -38,18 +42,11 @@ const ANIMATION_DURATION = 600;
 const STARTING_SCORE = 50;
 
 export default class Card extends Component {
-  constructor() {
-    super(...arguments);
-
-    this.state = {
-      score: STARTING_SCORE,
-      previousScores: [],
-      fadeAnimation: new Animated.Value(1),
-    };
-
-    this.handleUndo = this.handleUndo.bind(this);
-    this.handleScore = this.handleScore.bind(this);
-  }
+  state = {
+    score: STARTING_SCORE,
+    previousScores: [],
+    fadeAnimation: new Animated.Value(1),
+  };
 
   fadeScore() {
     Animated.sequence([
@@ -71,7 +68,7 @@ export default class Card extends Component {
     .start();
   }
 
-  handleUndo() {
+  handleUndo = () => {
     const score = this.state.previousScores.length > 0
         ? this.state.previousScores[this.state.previousScores.length - 1]
         : this.state.score;
@@ -80,9 +77,9 @@ export default class Card extends Component {
       score,
       previousScores: this.state.previousScores.slice(0, this.state.previousScores.length - 1),
     });
-  }
+  };
 
-  handleScore(addend) {
+  handleScore = addend => {
     const score = this.state.score + addend;
     this.setState({
       score,
@@ -90,20 +87,23 @@ export default class Card extends Component {
     });
 
     this.fadeScore();
-  }
+  };
 
   render(){
     return (
       <View style={globalStyles.container}>
         <View elevation={4} style={[theme.cardStyle, styles.card]}>
-          <View style={styles.topBar}>
-            <UndoButton onPress={this.handleUndo} />
+          <View style={styles.topSection}>
+            <View style={styles.sideBar}>
+              <UndoButton onPress={this.handleUndo} />
+            </View>
+            <Animated.View style={{...styles.scoreView, opacity: this.state.fadeAnimation}}>
+              <Text style={styles.score}>
+                {this.state.score}
+              </Text>
+            </Animated.View>
+            <View style={styles.sideBar}></View>
           </View>
-          <Animated.View style={{...styles.scoreView, opacity: this.state.fadeAnimation}}>
-            <Text style={styles.score}>
-              {this.state.score}
-            </Text>
-          </Animated.View>
           <Buttons onScore={this.handleScore} />
         </View>
       </View>

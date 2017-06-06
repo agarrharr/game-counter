@@ -17,17 +17,11 @@ const styles = Object.assign({}, globalStyles, StyleSheet.create({
 }));
 
 class Buttons extends Component {
-  constructor() {
-    super(...arguments);
+  state = {
+    addend: 0,
+  };
 
-    this.state = {
-      addend: 0,
-    };
-
-    this.handlePress = this.handlePress.bind(this);
-  }
-
-  handlePress(addend) {
+  handlePress = addend => {
     this.setState({
       addend: this.state.addend + addend,
     });
@@ -40,7 +34,7 @@ class Buttons extends Component {
         addend: 0,
       });
     }, DELAY_TIME);
-  }
+  };
 
   render() {
     const {onPressMinus1} = this.props;
