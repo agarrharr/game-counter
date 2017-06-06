@@ -78,12 +78,8 @@ export default class AnimatedNumber extends Component {
         ),
       ]),
     ])
-    .start(this.handleAnimationComplete);
+    .start(this.props.onAnimationComplete);
   };
-
-  handleAnimationComplete = () => {
-    this.props.onAnimationComplete();
-  }
 
   render(){
     const animatedNumberStyles = StyleSheet.flatten([

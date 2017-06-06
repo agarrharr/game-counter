@@ -20,8 +20,11 @@ const styles = {
     justifyContent: 'space-between',
   },
   topBar: {
+    flex: 1,
+    height: 10,
   },
   scoreView: {
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -69,8 +72,6 @@ export default class Card extends Component {
   }
 
   handleUndo() {
-    window.clearTimeout(this.fadeTimeout);
-
     const score = this.state.previousScores.length > 0
         ? this.state.previousScores[this.state.previousScores.length - 1]
         : this.state.score;
@@ -85,7 +86,7 @@ export default class Card extends Component {
     const score = this.state.score + addend;
     this.setState({
       score,
-      previousScores: [...this.state.previousScores, score],
+      previousScores: [...this.state.previousScores, this.state.score],
     });
 
     this.fadeScore();

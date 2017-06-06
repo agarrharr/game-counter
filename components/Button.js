@@ -59,7 +59,7 @@ class Button extends Component {
 
   handleAnimationComplete = () => {
     this.setState({
-      addends: [...this.state.addends.slice(0, this.state.addends.length - 1)],
+      addends: [...this.state.addends.slice(1)],
     });
   };
 
