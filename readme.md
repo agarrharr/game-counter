@@ -1,6 +1,12 @@
-# Development
+# game-counter
 
-## Start the app:
+A game to keep the score for a two player game such as Star Realms.
+
+![Screenshot](screenshot.jpg)
+
+## Development
+
+### Start the app:
 
 Open the Android Virtual Device (AVD) Manager (`android avd`) and start a device).
 
@@ -10,50 +16,50 @@ Or open Genymotion and start and android device.
 react-native run-android
 ```
 
-## Live Reloading
+### Live Reloading
 
 In the emulator, hit Cmd+M, and tap "Enable Live Reload".
 
-## Chrome Developer Tools
+### Chrome Developer Tools
 
 In the emulator, hit Cmd+M, and tap "Enable Live Reload".
 
-## Accessing console logs
+### Accessing console logs
 
 ```
 react-native log-android
 ```
 
-## Installation
+### Installation
 
 This is from the [React Native Getting Started guide](http://facebook.github.io/react-native/docs/getting-started.html)
 
-### Install node and watchman
+#### Install node and watchman
 
 ```
 brew install node
 brew install watchman
 ```
 
-### Install the React Native CLI
+#### Install the React Native CLI
 
 ```
 npm install -g react-native-cli
 ```
 
-### Install Android Studio
+#### Install Android Studio
 
 Make sure you have AVD (Android Virtual Device) and HAXM (Performance (Intel HAXM)).
 
 Run `android` to start SDK Manager, look for "Intel x86 Emulator Accelerator (HAXM installer)" under Extras.
 
-### Make sure you have JDK 8 (1.8.x)
+#### Make sure you have JDK 8 (1.8.x)
 
 ```
 javac -version
 ```
 
-### Install the Android 6 and 7 SDK
+#### Install the Android 6 and 7 SDK
 
 Select "SDK Platforms" from within the SDK Manager, then check the box next to "Show Package Details". Look for and expand the Android 6.0 (Marshmallow) entry, then make sure the following items are all checked:
 
@@ -66,7 +72,7 @@ Next, select "SDK Tools" and check the box next to "Show Package Details" here a
 
 Finally, click "Apply" to download and install the Android SDK and related build tools.
 
-### Add Android to your PATH
+#### Add Android to your PATH
 
 ```
 export ANDROID_HOME=~/Library/Android/sdk
@@ -74,7 +80,7 @@ export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 ```
 
-## Making a release
+### Making a release
 
 This is from the [React Native Documentation](http://facebook.github.io/react-native/docs/signed-apk-android.html).
 
@@ -93,6 +99,7 @@ This is from the [React Native Documentation](http://facebook.github.io/react-na
     ```
     cd android
     ./gradlew assembleRelease
+    open app/build/outputs/apk
     ```
 
 The generated APK can be found under `android/app/build/outputs/apk/app-release.apk`.
