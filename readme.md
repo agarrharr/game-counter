@@ -1,6 +1,8 @@
 # game-counter
 
-A game to keep the score for a two player game such as Star Realms.
+> A game to keep the score for a two player game such as Star Realms.
+
+<a href="https://app.codesponsor.io/link/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter" rel="nofollow"><img src="https://app.codesponsor.io/embed/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
 
 ![Screenshot](screenshot.jpg)
 
