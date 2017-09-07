@@ -2,8 +2,6 @@
 
 > A game to keep the score for a two player game such as Star Realms.
 
-<a href="https://app.codesponsor.io/link/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter" rel="nofollow"><img src="https://app.codesponsor.io/embed/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
-
 ![Screenshot](screenshot.jpg)
 
 ## Development
@@ -128,3 +126,5 @@ The generated APK can be found under `android/app/build/outputs/apk/app-release.
 - [ ] Add hamburger menu?
 - [ ] New game button?
 - [ ] Setting for starting score?
+
+<a href="https://app.codesponsor.io/link/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter" rel="nofollow"><img src="https://app.codesponsor.io/embed/3owRGftAkghuGdjHaa955zEJ/agarrharr/game-counter.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
