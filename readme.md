@@ -1,6 +1,6 @@
 # game-counter
 
-> A game to keep the score for a two player game such as Star Realms.
+> A game to keep the score for a two player game such as [Star Realms](https://boardgamegeek.com/boardgame/147020/star-realms).
 
 ![Screenshot](screenshot.jpg)
 
@@ -74,10 +74,10 @@ Finally, click "Apply" to download and install the Android SDK and related build
 
 #### Add Android to your PATH
 
-```
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+```sh
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+ANDROID_PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+export PATH="$ANDROID_PATH:$PATH"
 ```
 
 ### Making a release
@@ -117,7 +117,8 @@ The generated APK can be found under `android/app/build/outputs/apk/app-release.
 - [ ] Choose app name
 - [ ] Keep the screen on
 - [ ] Remove unnecessary permissions
-- [ ] Publish on Google Play and F-Droid
+- [ ] Publish on Google Play
+- [ ] Publish on F-Droid
 
 ### Stretch Goals
 
