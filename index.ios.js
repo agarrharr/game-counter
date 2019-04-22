@@ -1,53 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  StatusBar,
+  ToolbarAndroid,
+  View,
 } from 'react-native';
+import Card from './components/Card';
+import {APP, COLORS} from './constants';
+
+const styles = {
+  page: {
+    flex: 1,
+    alignItems: 'stretch',
+  },
+  toolbar: {
+    height: 56,
+    backgroundColor: COLORS.PRIMARY,
+  },
+  cardView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  }
+};
 
 export default class gameCounter extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <View style={styles.page}>
+        <StatusBar
+           backgroundColor={COLORS.PRIMARY}
+           barStyle="light-content"
+         />
+        <ToolbarAndroid
+          style={styles.toolbar}
+          title={APP.TITLE}
+          titleColor={COLORS.WHITE}
+        />
+        <View style={styles.cardView}>
+          <Card />
+          <Card />
+        </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('gameCounter', () => gameCounter);
